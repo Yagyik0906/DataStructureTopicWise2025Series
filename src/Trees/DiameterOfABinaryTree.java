@@ -2,8 +2,6 @@ package Trees;
 
 import java.util.Scanner;
 
-
-
 public class DiameterOfABinaryTree {
     static class TreeNode{
         int data;
@@ -27,19 +25,27 @@ public class DiameterOfABinaryTree {
         int count=diameterOfABinaryTree(root);
         System.out.println("Diameter of the Tree is = "+count);
         Pair count1=diameterOfABinaryTreeUsingPair(root);
+        System.out.println("Diameter of the Tree is = "+count1.first);
     }
 
-    private static Pair diameterOfABinaryTreeUsingPair(TreeNode root) {
+    private static Pair diameterOfABinaryTreeUsingPair(TreeNode root) {//Time Complexity=O(n)
         if(root == null){
             return new Pair(0, 0);
         }
         Pair left=diameterOfABinaryTreeUsingPair(root.left);
         Pair right=diameterOfABinaryTreeUsingPair(root.right);
 
+        int op1= left.first;
+        int op2= right.first;
+        int op3= left.second+right.second+1;
 
+        Pair ans=new Pair(0,0);
+        ans.first=Math.max(op1,Math.max(op2,op3));
+        ans.second=Math.max(left.second, right.second)+1;
+        return ans;
     }
 
-    private static int diameterOfABinaryTree(TreeNode root) {
+    private static int diameterOfABinaryTree(TreeNode root) {//Time Complexity=o(n2)
         if(root == null){
             return 0;
         }
